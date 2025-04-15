@@ -61,6 +61,10 @@ class PermissionSerializer(serializers.ModelSerializer):
 from .models import Role
 
 class RoleSerializer(serializers.ModelSerializer):
+    permissions = serializers.PrimaryKeyRelatedField(
+        many=True,
+        queryset=Permission.objects.all(),
+    )
     class Meta:
         model = Role
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'permissions']
